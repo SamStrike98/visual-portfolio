@@ -1,74 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Three.js Starter</title>
-  <style>
-    body { margin: 0; overflow: hidden; }
-    canvas { display: block; }
-  </style>
-  <script type="importmap">
-{
-  "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.module.js",
-    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.150.1/examples/jsm/"
-  }
-}
-</script>
-</head>
-<body>
-  <script type="module">
-    import * as THREE from 'https://unpkg.com/three@0.150.1/build/three.module.js';
-    import { OrbitControls } from 'https://unpkg.com/three@0.150.1/examples/jsm/controls/OrbitControls.js';
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../src/output.css" rel="stylesheet" />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+        <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.150.1/examples/jsm/"
+        }
+      }
+    </script>
+    <title>Starter</title>
+  </head>
+  <body>
+    <div class="bg-gray-800">
+      <nav x-data="{ open: false }" class="px-4 py-4">
+        <!-- Icons -->
+        <div x-cloak class="flex sm:hidden">
+          <button @click="open = !open">
+            <!-- Hamburger -->
+            <svg
+              x-show="!open"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-6 text-white"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              />
+            </svg>
 
-    // Scene
-    const scene = new THREE.Scene();
+            <!-- Cross -->
+            <svg
+              x-show="open"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-6 text-white"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18 18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
 
-    // Camera
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    );
-    camera.position.z = 5;
+        <!-- Mobile Nav -->
+        <div x-show="open" x-cloak class="text-white block sm:hidden">
+          <a href="/projects/starter" class="block">Starter</a>
+          <a href="#" class="block">Link Two</a>
+          <a href="#" class="block">Link Three</a>
+        </div>
 
-    // Renderer
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-
-    // OrbitControls
-    const controls = new OrbitControls(camera, renderer.domElement);
-
-    // Cube
-    const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
-
-    // Lighting
-    const light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(1, 1, 1);
-    scene.add(light);
-
-    // Animation loop
-    function animate() {
-      requestAnimationFrame(animate);
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
-      controls.update();
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    // Resize handling
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-  </script>
-</body>
+        <!-- Desktop Nav Nav -->
+        <div class="text-white hidden sm:flex gap-x-4">
+          <a href="/projects/starter">Starter</a>
+          <a href="#" class="">Link Two</a>
+          <a href="#" class="">Link Three</a>
+        </div>
+      </nav>
+    </div>
+    <style>
+      [x-cloak] {
+        display: none !important;
+      }
+    </style>
+    <script type="module" src="./main.js"></script>
+  </body>
 </html>
