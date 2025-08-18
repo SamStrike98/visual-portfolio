@@ -1,1 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
+
+@theme {
+    /* --font-ygo: "WDXL Lubrifont TC", "sans-serif"; */
+    --color-primary: #0acf52;
+    --color-secondary: #1f1f1f;
+    --color-background: #f4f4f4;
+
+    --color-accent: #F4A261;
+    --color-text: #3E3E3E;
+    --color-highlight: #79B3D4;
+    --font-main: "Saira", "sans-serif";
+}
+
+@layer components {
+    .card {
+        background-color: white;
+        border: solid 1px gray;
+        padding: 12px;
+        border-radius: 5px;
+    }
+
+    .btn {
+        border: solid 2px --color-primary;
+        color: --color-primary;
+        border-radius: 15px;
+        font-family: --font-main;
+        padding: 2px 3px 2px 3px;
+    }
+}
