@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="../../src/output.css" rel="stylesheet" />
+    <script defer src="../../main.js"></script>
     <script
       defer
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
@@ -70,17 +71,11 @@
         </div>
 
         <!-- Mobile Nav -->
-        <div x-show="open" x-cloak class="text-white block sm:hidden">
-          <a href="/projects/starter" class="block">Starter</a>
-          <a href="#" class="block">Link Two</a>
-          <a href="#" class="block">Link Three</a>
+        <div x-show="open" x-cloak class="text-white block sm:hidden nav-menu">
         </div>
 
         <!-- Desktop Nav Nav -->
-        <div class="text-white hidden sm:flex gap-x-4">
-          <a href="/projects/starter">Starter</a>
-          <a href="#" class="">Link Two</a>
-          <a href="#" class="">Link Three</a>
+        <div class="text-white hidden sm:flex gap-x-4 nav-menu">
         </div>
       </nav>
     </div>
