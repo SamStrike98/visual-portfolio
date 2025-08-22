@@ -25,75 +25,99 @@ window.addEventListener('resize', () => {
 const light = new THREE.AmbientLight(0xffffff, 5);
 scene.add(light);
 
-const solarSystem = new THREE.Group();
-solarSystem.position.set(-400,0,0)
 
-const planets = [
+const planetData = [
     {
         name: "Mercury",
         radius: 2,
-        x: -350,
+        x: 20,
+        orbitSpeed: 0.01,
+        spinSpeed: 0.01
     },
     {
         name: "Venus",
         radius: 4,
-        x: -260,
+        x: 70,
+        orbitSpeed: 0.02,
+        spinSpeed: 0.01
     },
     {
         name: "Earth",
         radius: 8,
-        x: -170,
+        x: 120,
+        orbitSpeed: 0.03,
+        spinSpeed: 0.01
     },
     {
         name: "Mars",
         radius: 6,
-        x: -80,
+        x: 160,
+        orbitSpeed: 0.04,
+        spinSpeed: 0.01
     },
     {
         name: "Jupiter",
         radius: 20,
-        x: 10,
+        x: 210,
+        orbitSpeed: 0.05,
+        spinSpeed: 0.01
     },
     {
         name: "Saturn",
         radius: 15,
-        x: 100,
+        x: 260,
+        orbitSpeed: 0.06,
+        spinSpeed: 0.01
     },
     {
         name: "Uranus",
         radius: 12,
-        x: 190,
+        x: 310,
+        orbitSpeed: 0.07,
+        spinSpeed: 0.01
     },
     {
         name: "Neptune",
         radius: 10,
-        x: 280,
+        x: 360,
+        orbitSpeed: 0.08,
+        spinSpeed: 0.01
     },
 ]
 
-const createPlanet = (planet, index) => {
+const planets = [];
+
+
+planetData.forEach(planet => {
+    const orbitGroup = new THREE.Group();
+
+
     const geometry = new THREE.SphereGeometry(planet.radius, 15, 15);
     const material = new THREE.MeshStandardMaterial({ color: 'green', wireframe: true });
     const mesh = new THREE.Mesh(geometry,material);
 
     mesh.position.x = planet.x;
+    orbitGroup.add(mesh);
 
-    solarSystem.add(mesh);
-}
-
-planets.forEach((item,index) => {
-    createPlanet(item, index);
+    planets.push({
+        orbitGroup: orbitGroup, mesh: mesh, orbitSpeed: planet.orbitSpeed, spinSpeed: planet.spinSpeed
+    })
+    scene.add(orbitGroup)
 })
 
-scene.add(solarSystem);
+
 
 camera.position.z = 35;
-camera.position.x = -500;
+
 
 function animate() {
 
-
-    solarSystem.rotation.y += 0.01;
+    planets.forEach(planet => {
+        planet.orbitGroup.rotation.y += planet.orbitSpeed
+        planet.mesh.rotation.y += planet.spinSpeed
+    })
+    
+    controls.update();
     renderer.render(scene, camera);
 
 }
