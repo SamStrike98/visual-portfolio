@@ -36,7 +36,7 @@ const planetData = [
         name: "Mercury",
         radius: 2,
         x: 20,
-        orbitSpeed: 0.001,
+        orbitSpeed: 0.0001,
         spinSpeed: 0.01,
         texture: "textures/mercury.jpg"
     },
@@ -44,7 +44,7 @@ const planetData = [
         name: "Venus",
         radius: 4,
         x: 70,
-        orbitSpeed: 0.002,
+        orbitSpeed: 0.0002,
         spinSpeed: 0.01,
         texture: "textures/venus.jpg"
     },
@@ -52,7 +52,7 @@ const planetData = [
         name: "Earth",
         radius: 8,
         x: 120,
-        orbitSpeed: 0.003,
+        orbitSpeed: 0.0003,
         spinSpeed: 0.01,
         texture: "textures/earth.jpg"
     },
@@ -60,7 +60,7 @@ const planetData = [
         name: "Mars",
         radius: 6,
         x: 160,
-        orbitSpeed: 0.004,
+        orbitSpeed: 0.0004,
         spinSpeed: 0.01,
         texture: "textures/mars.jpg"
     },
@@ -68,7 +68,7 @@ const planetData = [
         name: "Jupiter",
         radius: 20,
         x: 210,
-        orbitSpeed: 0.005,
+        orbitSpeed: 0.0005,
         spinSpeed: 0.01,
         texture: "textures/jupiter.jpg"
     },
@@ -76,7 +76,7 @@ const planetData = [
         name: "Saturn",
         radius: 15,
         x: 260,
-        orbitSpeed: 0.006,
+        orbitSpeed: 0.0006,
         spinSpeed: 0.01,
         texture: "textures/saturn.jpg"
     },
@@ -84,7 +84,7 @@ const planetData = [
         name: "Uranus",
         radius: 12,
         x: 310,
-        orbitSpeed: 0.007,
+        orbitSpeed: 0.0007,
         spinSpeed: 0.01,
         texture: "textures/uranus.jpg"
     },
@@ -92,7 +92,7 @@ const planetData = [
         name: "Neptune",
         radius: 10,
         x: 360,
-        orbitSpeed: 0.008,
+        orbitSpeed: 0.0008,
         spinSpeed: 0.01,
         texture: "textures/neptune.jpg"
     },
