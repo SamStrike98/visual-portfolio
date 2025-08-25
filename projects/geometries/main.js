@@ -4,12 +4,21 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+const canvas = document.getElementById("three-canvas");
+
+
+const renderer = new THREE.WebGLRenderer({canvas, antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setAnimationLoop(animate);
 
-document.body.appendChild(renderer.domElement);
+
 renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+const planetTitle = document.querySelector(".planet-title");
+const planetDescription = document.querySelector(".planet-description");
+planetTitle.textContent = "Earth";
+planetDescription.textContent = "jhdfskj sdjkfhsld sjdhflsd";
+
 
 const controls = new OrbitControls(camera, renderer.domElement);
 
@@ -27,6 +36,7 @@ window.addEventListener('resize', () => {
 
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
+
 
 
 const textureLoader = new THREE.TextureLoader();
