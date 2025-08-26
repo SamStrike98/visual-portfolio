@@ -14,10 +14,14 @@ renderer.setAnimationLoop(animate);
 
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 
+const menu = document.querySelector(".menu");
 const planetTitle = document.querySelector(".planet-title");
 const planetDescription = document.querySelector(".planet-description");
+const menuClose = document.querySelector('.menu_close');
 
-
+menuClose.addEventListener('click', () => {
+    menu.classList.add('hidden');
+})
 
 const controls = new OrbitControls(camera, renderer.domElement);
 
@@ -55,6 +59,7 @@ function onMouseDown(event) {
         console.log(selectedObject.planetDescription)
         planetTitle.textContent = selectedObject.name;
         planetDescription.textContent = selectedObject.planetDescription;
+        menu.classList.remove('hidden');
     }
 }
 
