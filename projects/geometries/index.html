@@ -24,31 +24,12 @@
       canvas {
         display: block;
       }
-      #container {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: end;
-      }
-      .menu {
-        position: absolute;
-        width: 500px;
-        height: 120px;
-        z-index: 9999;
-        color: white;
-        background-color: green;
-        margin-bottom: 50px;
-        border-radius: 15px;
-        padding: 5px;
-      }
     </style>
     <title>Starter</title>
   </head>
   <body class="">
-<div id="container">
-  <div class="menu">
+<div id="container" class="relative w-full h-full flex justify-center items-end">
+  <div class="menu bg-blue-500 absolute w-[500px] h-[120px] z-50 text-white mb-[50px] rounded-md p-2">
     <h2 class="planet-title"></h2>
     <p class="planet-description"></p>
   </div>
