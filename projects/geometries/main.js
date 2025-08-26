@@ -16,8 +16,7 @@ renderer.outputColorSpace = THREE.SRGBColorSpace;
 
 const planetTitle = document.querySelector(".planet-title");
 const planetDescription = document.querySelector(".planet-description");
-planetTitle.textContent = "Earth";
-planetDescription.textContent = "jhdfskj sdjkfhsld sjdhflsd";
+
 
 
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -36,6 +35,28 @@ window.addEventListener('resize', () => {
 
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
+
+
+// Raycaster
+const raycaster = new THREE.Raycaster();
+document.addEventListener('mousedown', onMouseDown);
+
+function onMouseDown(event) {
+    const coords = new THREE.Vector2(
+        (event.clientX / renderer.domElement.clientWidth) * 2 - 1,
+        -((event.clientY / renderer.domElement.clientHeight) * 2 - 1),
+
+    )
+    raycaster.setFromCamera(coords, camera)
+    const intersections = raycaster.intersectObjects(scene.children, true);
+    if(intersections.length > 0){
+        const selectedObject = intersections[0].object;
+        console.log(selectedObject.name)
+        console.log(selectedObject.planetDescription)
+        planetTitle.textContent = selectedObject.name;
+        planetDescription.textContent = selectedObject.planetDescription;
+    }
+}
 
 
 
@@ -122,10 +143,12 @@ planetData.forEach(planet => {
     const mesh = new THREE.Mesh(geometry,material);
 
     mesh.position.x = planet.x;
+    mesh.name = planet.name;
+    mesh.planetDescription = planet.orbitSpeed;
     orbitGroup.add(mesh);
 
     planets.push({
-        orbitGroup: orbitGroup, mesh: mesh, orbitSpeed: planet.orbitSpeed, spinSpeed: planet.spinSpeed
+        orbitGroup: orbitGroup, mesh: mesh, orbitSpeed: planet.orbitSpeed, spinSpeed: planet.spinSpeed, name:planet.name
     })
     scene.add(orbitGroup)
 })
