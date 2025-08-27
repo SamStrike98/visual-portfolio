@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
+
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 
@@ -21,7 +22,10 @@ const menuClose = document.querySelector('.menu_close');
 
 menuClose.addEventListener('click', () => {
     menu.classList.add('hidden');
+    paused = false;
 })
+
+let paused = false;
 
 const controls = new OrbitControls(camera, renderer.domElement);
 
@@ -60,6 +64,12 @@ function onMouseDown(event) {
         planetTitle.textContent = selectedObject.name;
         planetDescription.textContent = selectedObject.planetDescription;
         menu.classList.remove('hidden');
+        paused = true;
+        console.log(selectedObject.position);
+        console.log(camera);
+
+        
+
     }
 }
 
@@ -150,6 +160,7 @@ planetData.forEach(planet => {
     mesh.position.x = planet.x;
     mesh.name = planet.name;
     mesh.planetDescription = planet.orbitSpeed;
+    mesh.radius = planet.radius;
     orbitGroup.add(mesh);
 
     planets.push({
@@ -160,13 +171,16 @@ planetData.forEach(planet => {
 
 
 
-camera.position.z = 35;
+camera.position.z = 50;
+
 
 
 function animate() {
 
     planets.forEach(planet => {
+        if(!paused){
         planet.orbitGroup.rotation.y += planet.orbitSpeed
+        }
         planet.mesh.rotation.y += planet.spinSpeed
     })
     
