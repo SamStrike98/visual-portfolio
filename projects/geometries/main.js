@@ -17,12 +17,24 @@ renderer.outputColorSpace = THREE.SRGBColorSpace;
 
 const menu = document.querySelector(".menu");
 const planetTitle = document.querySelector(".planet-title");
-const planetDescription = document.querySelector(".planet-description");
+const siderealPeriod = document.getElementById("sidereal_period");
+const perihelion = document.getElementById("perihelion");
+const aphelion = document.getElementById("aphelion");
+const inclination = document.getElementById("inclination");
+const equatorialDiameter = document.getElementById("equatorial_diameter");
+const oblatness = document.getElementById("oblatness");
+const mass = document.getElementById("mass");
+const rotationPeriod = document.getElementById("rotation_period");
+const tilt = document.getElementById("tilt");
+
+
+
 const menuClose = document.querySelector('.menu_close');
 
 menuClose.addEventListener('click', () => {
     menu.classList.add('hidden');
     paused = false;
+    camera.position.set(0,0,50);
 })
 
 let paused = false;
@@ -62,18 +74,51 @@ function onMouseDown(event) {
         console.log(selectedObject.name)
         console.log(selectedObject.planetDescription)
         planetTitle.textContent = selectedObject.name;
-        planetDescription.textContent = selectedObject.planetDescription;
         menu.classList.remove('hidden');
         paused = true;
         console.log(selectedObject.position);
         console.log(camera);
 
-        
+        // Add Text Content
+        siderealPeriod.textContent = selectedObject.planetData.siderealPeriod;
+        perihelion.textContent = selectedObject.planetData.perihelion;
+        aphelion.textContent = selectedObject.planetData.aphelion;
+        inclination.textContent = selectedObject.planetData.inclination;
+        equatorialDiameter.textContent = selectedObject.planetData.equatorialDiameter;
+        oblatness.textContent = selectedObject.planetData.oblatness;
+        mass.textContent = selectedObject.planetData.mass;
+        rotationPeriod.textContent = selectedObject.planetData.rotationPeriod;
+        tilt.textContent = selectedObject.planetData.tilt;
+
+
+        focusOnPlanet(selectedObject);
 
     }
 }
 
+function focusOnPlanet(planetMesh, factor = 4) {
+    const target = new THREE.Vector3();
+    planetMesh.getWorldPosition(target);
 
+    // Get the planet radius
+    const radius = planetMesh.geometry.parameters.radius;
+
+    // Choose how far away we want to be
+    const distance = radius * factor;
+
+    // Fixed offset direction (for example, along Z axis)
+    const offset = new THREE.Vector3(0, 0, distance);
+
+    // Place camera at planet position + offset
+    camera.position.copy(target.clone().add(offset));
+
+    // Look at planet
+    camera.lookAt(target);
+
+    // If you're pausing OrbitControls, also reset its target
+    controls.target.copy(target);
+    controls.update();
+}
 
 const textureLoader = new THREE.TextureLoader();
 
@@ -84,7 +129,18 @@ const planetData = [
         x: 20,
         orbitSpeed: 0.0001,
         spinSpeed: 0.01,
-        texture: "textures/mercury.jpg"
+        texture: "textures/mercury.jpg",
+        data: {
+            siderealPeriod: "87.97d",
+            perihelion: "0.31AU",
+            aphelion: "0.47AU",
+            inclination: "7.0 deg",
+            equatorialDiameter: "4,878km",
+            oblatness: "0.0",
+            mass: "0.06",
+            rotationPeriod: "58.65d",
+            tilt: "7 deg"
+        }
     },
     {
         name: "Venus",
@@ -92,7 +148,18 @@ const planetData = [
         x: 70,
         orbitSpeed: 0.0002,
         spinSpeed: 0.01,
-        texture: "textures/venus.jpg"
+        texture: "textures/venus.jpg",
+        data: {
+            siderealPeriod: "224.70d",
+            perihelion: "0.72AU",
+            aphelion: "0.73AU",
+            inclination: "3.4 deg",
+            equatorialDiameter: "12,100km",
+            oblatness: "0.0",
+            mass: "0.82",
+            rotationPeriod: "243d",
+            tilt: "177 deg"
+        }
     },
     {
         name: "Earth",
@@ -100,7 +167,18 @@ const planetData = [
         x: 120,
         orbitSpeed: 0.0003,
         spinSpeed: 0.01,
-        texture: "textures/earth.jpg"
+        texture: "textures/earth.jpg",
+        data: {
+            siderealPeriod: "365.26d",
+            perihelion: "0.98AU",
+            aphelion: "1.02AU",
+            inclination: "0.0 deg",
+            equatorialDiameter: "12,756km",
+            oblatness: "0.0034",
+            mass: "1.00",
+            rotationPeriod: "23.934h",
+            tilt: "23 deg"
+        }
     },
     {
         name: "Mars",
@@ -108,7 +186,18 @@ const planetData = [
         x: 160,
         orbitSpeed: 0.0004,
         spinSpeed: 0.01,
-        texture: "textures/mars.jpg"
+        texture: "textures/mars.jpg",
+        data: {
+            siderealPeriod: "686.98d",
+            perihelion: "1.38AU",
+            aphelion: "1.67AU",
+            inclination: "1.8 deg",
+            equatorialDiameter: "6,794km",
+            oblatness: "0.005",
+            mass: "0.11",
+            rotationPeriod: "24.623h",
+            tilt: "25 deg"
+        }
     },
     {
         name: "Jupiter",
@@ -116,7 +205,18 @@ const planetData = [
         x: 210,
         orbitSpeed: 0.0005,
         spinSpeed: 0.01,
-        texture: "textures/jupiter.jpg"
+        texture: "textures/jupiter.jpg",
+        data: {
+            siderealPeriod: "11.86y",
+            perihelion: "4.95AU",
+            aphelion: "5.45AU",
+            inclination: "1.3 deg",
+            equatorialDiameter: "142,800km",
+            oblatness: "0.065",
+            mass: "317.89",
+            rotationPeriod: "9.842h",
+            tilt: "3 deg"
+        }
     },
     {
         name: "Saturn",
@@ -124,7 +224,18 @@ const planetData = [
         x: 260,
         orbitSpeed: 0.0006,
         spinSpeed: 0.01,
-        texture: "textures/saturn.jpg"
+        texture: "textures/saturn.jpg",
+        data: {
+            siderealPeriod: "29.46y",
+            perihelion: "9.01AU",
+            aphelion: "10.07AU",
+            inclination: "2.5 deg",
+            equatorialDiameter: "120,000km",
+            oblatness: "0.108",
+            mass: "95.17",
+            rotationPeriod: "10.233h",
+            tilt: "27 deg"
+        }
     },
     {
         name: "Uranus",
@@ -132,7 +243,18 @@ const planetData = [
         x: 310,
         orbitSpeed: 0.0007,
         spinSpeed: 0.01,
-        texture: "textures/uranus.jpg"
+        texture: "textures/uranus.jpg",
+        data: {
+            siderealPeriod: "84.01y",
+            perihelion: "18.28AU",
+            aphelion: "20.09AU",
+            inclination: "0.8 deg",
+            equatorialDiameter: "52,400km",
+            oblatness: "0.03",
+            mass: "14.56",
+            rotationPeriod: "16-28h",
+            tilt: "98 deg"
+        }
     },
     {
         name: "Neptune",
@@ -140,7 +262,18 @@ const planetData = [
         x: 360,
         orbitSpeed: 0.0008,
         spinSpeed: 0.01,
-        texture: "textures/neptune.jpg"
+        texture: "textures/neptune.jpg",
+        data: {
+            siderealPeriod: "164.79y",
+            perihelion: "29.80AU",
+            aphelion: "30.32AU",
+            inclination: "1.8 deg",
+            equatorialDiameter: "48,400km",
+            oblatness: "0.02",
+            mass: "17.24",
+            rotationPeriod: "18-20h",
+            tilt: "30 deg"
+        }
     },
 ]
 
@@ -161,6 +294,7 @@ planetData.forEach(planet => {
     mesh.name = planet.name;
     mesh.planetDescription = planet.orbitSpeed;
     mesh.radius = planet.radius;
+    mesh.planetData = planet.data;
     orbitGroup.add(mesh);
 
     planets.push({
