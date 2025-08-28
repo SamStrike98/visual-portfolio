@@ -22,7 +22,7 @@ const perihelion = document.getElementById("perihelion");
 const aphelion = document.getElementById("aphelion");
 const inclination = document.getElementById("inclination");
 const equatorialDiameter = document.getElementById("equatorial_diameter");
-const oblatness = document.getElementById("oblatness");
+const oblateness = document.getElementById("oblateness");
 const mass = document.getElementById("mass");
 const rotationPeriod = document.getElementById("rotation_period");
 const tilt = document.getElementById("tilt");
@@ -85,7 +85,7 @@ function onMouseDown(event) {
         aphelion.textContent = selectedObject.planetData.aphelion;
         inclination.textContent = selectedObject.planetData.inclination;
         equatorialDiameter.textContent = selectedObject.planetData.equatorialDiameter;
-        oblatness.textContent = selectedObject.planetData.oblatness;
+        oblateness.textContent = selectedObject.planetData.oblateness;
         mass.textContent = selectedObject.planetData.mass;
         rotationPeriod.textContent = selectedObject.planetData.rotationPeriod;
         tilt.textContent = selectedObject.planetData.tilt;
@@ -136,7 +136,7 @@ const planetData = [
             aphelion: "0.47AU",
             inclination: "7.0 deg",
             equatorialDiameter: "4,878km",
-            oblatness: "0.0",
+            oblateness: "0.0",
             mass: "0.06",
             rotationPeriod: "58.65d",
             tilt: "7 deg"
@@ -155,7 +155,7 @@ const planetData = [
             aphelion: "0.73AU",
             inclination: "3.4 deg",
             equatorialDiameter: "12,100km",
-            oblatness: "0.0",
+            oblateness: "0.0",
             mass: "0.82",
             rotationPeriod: "243d",
             tilt: "177 deg"
@@ -174,7 +174,7 @@ const planetData = [
             aphelion: "1.02AU",
             inclination: "0.0 deg",
             equatorialDiameter: "12,756km",
-            oblatness: "0.0034",
+            oblateness: "0.0034",
             mass: "1.00",
             rotationPeriod: "23.934h",
             tilt: "23 deg"
@@ -193,7 +193,7 @@ const planetData = [
             aphelion: "1.67AU",
             inclination: "1.8 deg",
             equatorialDiameter: "6,794km",
-            oblatness: "0.005",
+            oblateness: "0.005",
             mass: "0.11",
             rotationPeriod: "24.623h",
             tilt: "25 deg"
@@ -212,7 +212,7 @@ const planetData = [
             aphelion: "5.45AU",
             inclination: "1.3 deg",
             equatorialDiameter: "142,800km",
-            oblatness: "0.065",
+            oblateness: "0.065",
             mass: "317.89",
             rotationPeriod: "9.842h",
             tilt: "3 deg"
@@ -231,7 +231,7 @@ const planetData = [
             aphelion: "10.07AU",
             inclination: "2.5 deg",
             equatorialDiameter: "120,000km",
-            oblatness: "0.108",
+            oblateness: "0.108",
             mass: "95.17",
             rotationPeriod: "10.233h",
             tilt: "27 deg"
@@ -250,7 +250,7 @@ const planetData = [
             aphelion: "20.09AU",
             inclination: "0.8 deg",
             equatorialDiameter: "52,400km",
-            oblatness: "0.03",
+            oblateness: "0.03",
             mass: "14.56",
             rotationPeriod: "16-28h",
             tilt: "98 deg"
@@ -269,7 +269,7 @@ const planetData = [
             aphelion: "30.32AU",
             inclination: "1.8 deg",
             equatorialDiameter: "48,400km",
-            oblatness: "0.02",
+            oblateness: "0.02",
             mass: "17.24",
             rotationPeriod: "18-20h",
             tilt: "30 deg"
