@@ -28,9 +28,9 @@
     <title>Starter</title>
   </head>
   <body class="">
-    <div id="container" class="relative w-full h-full flex items-end">
+    <div id="container" class="relative w-full h-full">
       <div
-        class="menu hidden bg-blue-900/10  absolute w-[500px] z-50 text-white mb-[50px] rounded-md p-5"
+        class="menu hidden bg-blue-900/10 bottom-0 absolute w-[500px] z-50 text-white mb-[50px] rounded-md p-5"
       >
         <span class="menu_close cursor-pointer">
           <svg
@@ -63,6 +63,57 @@
           <li>Tilt (deg): <span id="tilt"></span></li>
         </ul>
       </div>
+
+      <div class="planet-bar bg-blue-900/30 absolute w-[120px] h-full right-2 z-50 mb-[50px] rounded-md p-2">
+        <ul class="h-full w-full grid grid-rows-8 gap-[6px]">
+          <li id="mercury" class="group planet-btn bg-white border border-gray-200 cursor-pointer flex justify-center items-center overflow-hidden">
+            <img src="images/mercury.png" class="object-cover">
+            <div class="text-white font-bold text-2xl bg-blue-900/30 px-3 py-2 right-full absolute hidden group-hover:flex">Mercury</div>
+          </li>
+          <li id="venus" class="group planet-btn bg-white border border-gray-200 cursor-pointer flex justify-center items-center overflow-hidden">
+            <img src="images/venus.png" class="object-cover">
+            <div class="text-white font-bold text-2xl bg-blue-900/30 px-3 py-2 right-full absolute hidden group-hover:flex">Venus</div>
+          </li>
+          <li id="earth" class="group planet-btn bg-white border border-gray-200 cursor-pointer flex justify-center items-center overflow-hidden">
+            <img src="images/earth.png" class="object-cover">
+            <div class="text-white font-bold text-2xl bg-blue-900/30 px-3 py-2 right-full absolute hidden group-hover:flex">Earth</div>
+          </li>
+          <li id="mars" class="group planet-btn bg-white border border-gray-200 cursor-pointer flex justify-center items-center overflow-hidden">
+            <img src="images/mars.png" class="object-cover">
+            <div class="text-white font-bold text-2xl bg-blue-900/30 px-3 py-2 right-full absolute hidden group-hover:flex">Mars</div>
+          </li>
+          <li id="jupiter" class="group planet-btn bg-white border border-gray-200 cursor-pointer flex justify-center items-center overflow-hidden">
+            <img src="images/jupiter.png" class="object-cover">
+            <div class="text-white font-bold text-2xl bg-blue-900/30 px-3 py-2 right-full absolute hidden group-hover:flex">Jupiter</div>
+          </li>
+          <li id="saturn" class="group planet-btn bg-white border border-gray-200 cursor-pointer flex justify-center items-center overflow-hidden">
+            <img src="images/saturn.png" class="object-cover">
+            <div class="text-white font-bold text-2xl bg-blue-900/30 px-3 py-2 right-full absolute hidden group-hover:flex">Saturn</div>
+          </li>
+          <li id="uranus" class="group planet-btn bg-white border border-gray-200 cursor-pointer flex justify-center items-center overflow-hidden">
+            <img src="images/uranus.png" class="object-cover">
+            <div class="text-white font-bold text-2xl bg-blue-900/30 px-3 py-2 right-full absolute hidden group-hover:flex">Uranus</div>
+          </li>
+          <li id="neptune" class="group planet-btn bg-white border border-gray-200 cursor-pointer flex justify-center items-center overflow-hidden">
+            <img src="images/neptune.png" class="object-cover">
+            <div class="text-white font-bold text-2xl bg-blue-900/30 px-3 py-2 right-full absolute hidden group-hover:flex">Neptune</div>
+          </li>
+        </ul>
+      </div>
+
+      <div id="top-down-btn" class="absolute z-50 top-[5px] left-[5px] bg-gray-900 text-white cursor-pointer px-2 py-3">Top-down View</div>
+      <div id="standard-btn" class="absolute z-50 top-[5px] left-[150px] bg-gray-900 text-white cursor-pointer px-2 py-3">Standard View</div>
+
+      <div id="play-pause-btn" class="absolute z-50 top-[60px] left-[5px] bg-gray-900 text-white cursor-pointer px-2 py-3">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 play hidden">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" />
+        </svg>
+
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 pause">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
+        </svg>
+      </div>
+
       <!-- Three.js Canvas -->
       <canvas id="three-canvas" class="z-0"></canvas>
     </div>

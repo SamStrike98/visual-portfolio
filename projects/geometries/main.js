@@ -27,14 +27,50 @@ const mass = document.getElementById("mass");
 const rotationPeriod = document.getElementById("rotation_period");
 const tilt = document.getElementById("tilt");
 
+const planetBtns = document.querySelectorAll('.planet-btn');
+planetBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        console.log(btn.id);
+        console.log(scene.getObjectByName(btn.id).children[0]);
 
+        focusOnPlanet(scene.getObjectByName(btn.id).children[0]);
+    })
+})
+
+const playPauseBtn = document.getElementById('play-pause-btn');
+const playBtn = document.querySelector('.play');
+const pauseBtn = document.querySelector('.pause');
+playPauseBtn.addEventListener('click', () => {
+    paused = !paused;
+})
+
+
+const topDownBtn = document.getElementById("top-down-btn");
+
+topDownBtn.addEventListener('click', () => {
+    camera.position.set(-22, 840, 130);
+    camera.lookAt(0, 0, 0);
+
+    controls.target.set(0, 0, 0);
+    controls.update();
+})
+
+const standardBtn = document.getElementById("standard-btn");
+
+standardBtn.addEventListener('click', () => {
+    camera.position.set(0, 0, 480);
+    camera.lookAt(0, 0, 0);
+
+    controls.target.set(0, 0, 0);
+    controls.update();
+})
 
 const menuClose = document.querySelector('.menu_close');
 
 menuClose.addEventListener('click', () => {
     menu.classList.add('hidden');
     paused = false;
-    camera.position.set(0,0,50);
+    camera.position.set(0,0,480);
 })
 
 let paused = false;
@@ -71,28 +107,8 @@ function onMouseDown(event) {
     const intersections = raycaster.intersectObjects(scene.children, true);
     if(intersections.length > 0){
         const selectedObject = intersections[0].object;
-        console.log(selectedObject.name)
-        console.log(selectedObject.planetDescription)
-        planetTitle.textContent = selectedObject.name;
-        menu.classList.remove('hidden');
-        paused = true;
-        console.log(selectedObject.position);
-        console.log(camera);
-
-        // Add Text Content
-        siderealPeriod.textContent = selectedObject.planetData.siderealPeriod;
-        perihelion.textContent = selectedObject.planetData.perihelion;
-        aphelion.textContent = selectedObject.planetData.aphelion;
-        inclination.textContent = selectedObject.planetData.inclination;
-        equatorialDiameter.textContent = selectedObject.planetData.equatorialDiameter;
-        oblateness.textContent = selectedObject.planetData.oblateness;
-        mass.textContent = selectedObject.planetData.mass;
-        rotationPeriod.textContent = selectedObject.planetData.rotationPeriod;
-        tilt.textContent = selectedObject.planetData.tilt;
-
 
         focusOnPlanet(selectedObject);
-
     }
 }
 
@@ -118,6 +134,23 @@ function focusOnPlanet(planetMesh, factor = 4) {
     // If you're pausing OrbitControls, also reset its target
     controls.target.copy(target);
     controls.update();
+
+
+    planetTitle.textContent = planetMesh.name;
+    menu.classList.remove('hidden');
+
+    // Pause Orbits
+    paused = true;
+    // Add Text Content
+    siderealPeriod.textContent = planetMesh.planetData.siderealPeriod;
+    perihelion.textContent = planetMesh.planetData.perihelion;
+    aphelion.textContent = planetMesh.planetData.aphelion;
+    inclination.textContent = planetMesh.planetData.inclination;
+    equatorialDiameter.textContent = planetMesh.planetData.equatorialDiameter;
+    oblateness.textContent = planetMesh.planetData.oblateness;
+    mass.textContent = planetMesh.planetData.mass;
+    rotationPeriod.textContent = planetMesh.planetData.rotationPeriod;
+    tilt.textContent = planetMesh.planetData.tilt;
 }
 
 const textureLoader = new THREE.TextureLoader();
@@ -282,7 +315,7 @@ const planets = [];
 
 planetData.forEach(planet => {
     const orbitGroup = new THREE.Group();
-
+    orbitGroup.name = planet.name.toLowerCase();
     const texture = textureLoader.load(planet.texture);
     texture.colorSpace = THREE.SRGBColorSpace;
 
@@ -305,7 +338,7 @@ planetData.forEach(planet => {
 
 
 
-camera.position.z = 50;
+camera.position.z = 480;
 
 
 
@@ -317,7 +350,15 @@ function animate() {
         }
         planet.mesh.rotation.y += planet.spinSpeed
     })
-    
+
+    if(paused) {
+        playBtn.classList.remove('hidden');
+        pauseBtn.classList.add('hidden')
+    } else {
+        playBtn.classList.add('hidden');
+        pauseBtn.classList.remove('hidden')        
+    }
+    // console.log(camera.position)
     controls.update();
     renderer.render(scene, camera);
 
