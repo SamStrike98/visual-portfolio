@@ -341,6 +341,31 @@ planetData.forEach(planet => {
 camera.position.z = 480;
 
 
+function createStarField(num=2000, spread=2000){
+    const geometry = new THREE.BufferGeometry();
+    const positions = [];
+
+    for(let i = 0; i<num; i++){
+        const x = (Math.random() - 0.5)*spread;
+        const y = (Math.random() - 0.5) * spread;
+        const z = (Math.random() - 0.5) * spread;
+        positions.push(x,y,z);
+    }
+
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+
+    const material = new THREE.PointsMaterial({
+        color: 0xffffff,
+        size: 1.5,
+        sizeAttenuation: true
+    });
+
+    const stars = new THREE.Points(geometry, material);
+    scene.add(stars);
+}
+
+createStarField();
+
 
 function animate() {
 
