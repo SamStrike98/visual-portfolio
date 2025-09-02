@@ -354,6 +354,9 @@
   .grid-rows-8 {
     grid-template-rows: repeat(8, minmax(0, 1fr));
   }
+  .flex-col {
+    flex-direction: column;
+  }
   .flex-row {
     flex-direction: row;
   }
@@ -523,6 +526,11 @@
   .sm\:hidden {
     @media (width >= 40rem) {
       display: none;
+    }
+  }
+  .md\:flex-row {
+    @media (width >= 48rem) {
+      flex-direction: row;
     }
   }
 }
