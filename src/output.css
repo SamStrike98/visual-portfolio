@@ -233,6 +233,9 @@
   .left-\[150px\] {
     left: 150px;
   }
+  .left-\[300px\] {
+    left: 300px;
+  }
   .left-full {
     left: 100%;
   }
@@ -351,6 +354,9 @@
   .grid-rows-8 {
     grid-template-rows: repeat(8, minmax(0, 1fr));
   }
+  .flex-row {
+    flex-direction: row;
+  }
   .items-center {
     align-items: center;
   }
@@ -368,6 +374,9 @@
   }
   .gap-4 {
     gap: calc(var(--spacing) * 4);
+  }
+  .gap-\[5px\] {
+    gap: 5px;
   }
   .gap-\[6px\] {
     gap: 6px;

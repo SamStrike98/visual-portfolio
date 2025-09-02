@@ -65,12 +65,22 @@ standardBtn.addEventListener('click', () => {
     controls.update();
 })
 
+const starfieldBtn = document.getElementById("starfield-btn");
+
+starfieldBtn.addEventListener('click', () => {
+    if(scene.getObjectByName("stars")){
+        toggleStarField(false)
+    }else {
+        toggleStarField();
+    }
+})
+
 const menuClose = document.querySelector('.menu_close');
 
 menuClose.addEventListener('click', () => {
     menu.classList.add('hidden');
     paused = false;
-    camera.position.set(0,0,480);
+    // camera.position.set(0,0,480);
 })
 
 let paused = false;
@@ -341,7 +351,8 @@ planetData.forEach(planet => {
 camera.position.z = 480;
 
 
-function createStarField(num=2000, spread=2000){
+function toggleStarField(num=2000, spread=2000, add = true){
+    if(add && !scene.getObjectByName("stars")){
     const geometry = new THREE.BufferGeometry();
     const positions = [];
 
@@ -361,10 +372,21 @@ function createStarField(num=2000, spread=2000){
     });
 
     const stars = new THREE.Points(geometry, material);
+    stars.name = "stars";
+
     scene.add(stars);
 }
+else {
+        const starsObj = scene.getObjectByName("stars");
+        scene.remove(starsObj);
+    }
+}
 
-createStarField();
+console.log(scene);
+
+toggleStarField();
+
+
 
 
 function animate() {
