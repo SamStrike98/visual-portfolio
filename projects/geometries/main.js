@@ -75,6 +75,12 @@ starfieldBtn.addEventListener('click', () => {
     }
 })
 
+const planetBarBtn = document.getElementById("planet-bar-btn");
+const planetBar = document.getElementById("planet-bar")
+planetBarBtn.addEventListener('click', () => {
+    planetBar.classList.toggle('hidden');
+})
+
 const menuClose = document.querySelector('.menu_close');
 
 menuClose.addEventListener('click', () => {
