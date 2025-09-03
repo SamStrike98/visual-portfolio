@@ -129,6 +129,7 @@ function onMouseDown(event) {
 }
 
 function focusOnPlanet(planetMesh, factor = 4) {
+    
     const target = new THREE.Vector3();
     planetMesh.getWorldPosition(target);
 
@@ -136,7 +137,9 @@ function focusOnPlanet(planetMesh, factor = 4) {
     const radius = planetMesh.geometry.parameters.radius;
 
     // Choose how far away we want to be
-    const distance = radius * factor;
+    let distance;
+
+    window.innerWidth < 400 ? distance = radius * 6 : distance = radius * factor;
 
     // Fixed offset direction (for example, along Z axis)
     const offset = new THREE.Vector3(0, 0, distance);
